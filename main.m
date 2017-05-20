@@ -1,4 +1,4 @@
-env = TwoOptionsEnv(-10, 0.1, 1, [0.9, 0.1; 0.1, 0.9]);
+env = TwoOptionsEnv(-10, 1, [0.9, 0.1; 0.1, 0.9]);
 agent = ExampleAgent();
 
 reward = 0;
