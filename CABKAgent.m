@@ -29,7 +29,6 @@ classdef CABKAgent < handle
                 obj.experience(obj.sequence + 1) = obj.experience(obj.sequence + 1) + results(1);
             end
             obj.sequence = mod(obj.sequence, 2 ^ (obj.k - 1)) * 2 + (results(1) > results(2));
-            disp(obj.sequence);
         end
     end
     

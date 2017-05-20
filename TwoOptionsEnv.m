@@ -16,7 +16,7 @@ classdef TwoOptionsEnv < handle
     end
     
     methods
-        function obj = TwoOptionsEnv(loss, gain, transition)
+        function obj = TwoOptionsEnv(gain, loss, transition)
         % Constructor
             obj.status = Status(randi(2)); % TODO: ³õÊ¼×´Ì¬ÔõÃ´¶¨£¿
             obj.loss = loss;
