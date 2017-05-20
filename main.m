@@ -1,5 +1,5 @@
 env = TwoOptionsEnv(-10, 1, [0.9, 0.1; 0.1, 0.9]);
-agent = ExampleAgent();
+agent = CABKAgent(2);
 
 reward = 0;
 for i = 1:1000

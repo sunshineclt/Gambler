@@ -4,42 +4,35 @@ classdef DisAvrAgent < handle
     
     properties
         alpha % a free parameter
-        j
         t
-        result
+        Qsafe
+        Qrisky
     end
     
     methods
-        function obj = DisAvrAgent(alpha,j,t,result)
+        function obj = DisAvrAgent(alpha)
         % Constructor（初始化）
             obj.alpha = alpha;
-            obj.j = j;
-            obj.t = t;
-            obj.result = result;
+            obj.t = 0;
+            obj.Qsafe = 0;
+            obj.Qrisky = 0;
         end
         
         function action = chooseAction(obj)
-            Qjt = WeiAvrPayoff(obj.j,obj.t,obj.alpha,obj.result);
-            if Qjt>0           % 可以认为0是分界吗？
+            if obj.Qrisky > obj.Qsafe
                 action = 1;
-            else 
-                action = 0;
+            else
+                action = 2;
             end
         end
         
-        function [j,t,result] = updateAgent(obj, action)
+        function [] = updateAgent(obj, V)
         % this function should take results (contains every action's result)
         % of last action and update agent. 
         % 拿到上一次action的results（两个option的results都有），更新这个agent，例如更新每种K长度的序列的平均收益
-            if action == 1
-                result = risky;
-                obj.result = result;
-            else 
-                result = 0;
-                obj.result = result;
-            end
-            j = obj.j+1; obj.j = j;
-            t = obj.t+1; obj.t = t;
+            obj.t = obj.t + 1;
+            obj.Qrisky = WeiAvrPayoff(obj.Qrisky, obj.t, obj.alpha, V(1));
+            obj.Qsafe = WeiAvrPayoff(obj.Qsafe, obj.t, obj.alpha, V(2));
         end
     end
     
