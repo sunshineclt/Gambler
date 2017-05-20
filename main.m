@@ -1,8 +1,8 @@
-env = TwoOptionsEnv(10, -1, [0.1, 0.9; 0.9, 0.1]);
-agent = CABKAgent(2);
+env = ChangingTwoOptionsEnv(1, -1, 0.1, 2, 2);
+agent = CABKAgent(6);
 
 reward = 0;
-for i = 1:10000
+for i = 1:100
     action = agent.chooseAction();
     [result, whole_result] = env.step(action);
     reward = reward + result;

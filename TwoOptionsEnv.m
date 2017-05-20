@@ -1,7 +1,7 @@
 classdef TwoOptionsEnv < handle
     % TWOOPTIONSENV is a game env that have 2 options for player to choose. 
-    % Option 1 is a risky option which means to have p_loss probability to
-    % get a loss, and to have p_gain probability to get a gain
+    % Option 1 is a risky option which means to have a state to indicate
+    % whether it's in a loss state or a gain state
     % Option 2 is a safe option which means to have a 0 payoff all the time
     % Option 1 has an internal state indicates whether it will be gain or
     % loss. This internal state has Markov property and thus after every
