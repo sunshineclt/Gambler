@@ -1,5 +1,5 @@
-env = ChangingTwoOptionsEnv(1, -1, 0.1, 2, 2);
-agent = CABKAgent(6);
+env = TwoOptionsEnv(10, -1, [0.9, 0.1; 0.1, 0.9]);
+agent = FullyInformedBayesianAgent(10, -1, [0.9, 0.1; 0.1, 0.9]);
 
 reward = 0;
 for i = 1:100
