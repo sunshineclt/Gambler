@@ -1,7 +1,7 @@
 classdef TwoOptionsEnv < handle
     % TWOOPTIONSENV is a game env that have 2 options for player to choose. 
-    % Option 1 is a risky option which means to have p_loss probability to
-    % get a loss, and to have p_gain probability to get a gain
+    % Option 1 is a risky option which means to have a state to indicate
+    % whether it's in a loss state or a gain state
     % Option 2 is a safe option which means to have a 0 payoff all the time
     % Option 1 has an internal state indicates whether it will be gain or
     % loss. This internal state has Markov property and thus after every
@@ -11,20 +11,16 @@ classdef TwoOptionsEnv < handle
     properties
         status % current internal state of option risky
         loss % loss amount of risky choice
-        ploss % p_loss of risky choice
         gain % gain amount of risky choice
-        pgain % p_gain of risky choice
         transition % transition matrix
     end
     
     methods
-        function obj = TwoOptionsEnv(loss, ploss, gain, transition)
+        function obj = TwoOptionsEnv(gain, loss, transition)
         % Constructor
             obj.status = Status(randi(2)); % TODO: ³õÊ¼×´Ì¬ÔõÃ´¶¨£¿
             obj.loss = loss;
-            obj.ploss = ploss;
             obj.gain = gain;
-            obj.pgain = 1 - ploss;
             obj.transition = transition;
         end
         
@@ -34,7 +30,7 @@ classdef TwoOptionsEnv < handle
         % Return: 
         %   result: this action's result
         %   whole_result: two actions's result            
-            if rand <= obj.ploss
+            if obj.status == Status.Loss
                 risky = obj.loss;
             else
                 risky = obj.gain;
@@ -46,7 +42,7 @@ classdef TwoOptionsEnv < handle
                 result = 0;
                 whole_result = [risky, 0];
             end
-            if rand > obj.transition(double(obj.status), 1)
+            if rand <= obj.transition(double(obj.status), 1)
                 obj.status = Status.Gain;
             else
                 obj.status = Status.Loss;

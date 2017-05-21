@@ -1,8 +1,8 @@
-env = TwoOptionsEnv(-10, 0.1, 1, [0.9, 0.1; 0.1, 0.9]);
-agent = ExampleAgent();
+env = TwoOptionsEnv(10, -1, [0.9, 0.1; 0.1, 0.9]);
+agent = FullyInformedBayesianAgent(10, -1, [0.9, 0.1; 0.1, 0.9]);
 
 reward = 0;
-for i = 1:1000
+for i = 1:100
     action = agent.chooseAction();
     [result, whole_result] = env.step(action);
     reward = reward + result;
