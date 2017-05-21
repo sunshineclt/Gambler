@@ -1,11 +1,15 @@
 classdef Status < double
     % STATUS indicates the status in environment
-    % Gain = 1
-    % Loss = 2
+    % Gain1 = 1
+    % Gain2 = 2
+    % Loss1 = 3
+    % Loss2 = 4
     
    enumeration
-      Gain (1)
-      Loss (2)
+      Gain1 (1)
+      Gain2 (2)
+      Loss1 (3)
+      Loss2 (4)
    end
    
 end
