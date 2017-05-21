@@ -6,15 +6,19 @@ classdef FullyInformedBayesianAgent < handle
         % Some Properties of an agent
         % For example, the GGLLG sequence or the data for every possible
         % sequence of K length (每种K长度的序列的平均收益之类的)
-        
+        choice;
+        value;
+        transition;
+        threshold;
     end
     
     methods
         function obj = FullyInformedBayesianAgent(env)
-        obj.loss = env.loss;
-        obj.ploss = env.ploss;
-        obj.gain = env.gain;
+%       Initialization
+        obj.choice(1)=double(Status(randi(2)));
+        obj.value=[env.loss,env.gain];% 只是针对0.9 0.1的那个矩阵，如果是Figure 4的那种需要修改
         obj.transition = env.transition;
+        obj.threshold=0;
             
         end
         
@@ -22,14 +26,19 @@ classdef FullyInformedBayesianAgent < handle
         % this function should choose an action between 1(risky) and 2(safe)
         % 给出一个action
 %         全选risk，全选save，只看上次的课
-            action = (rand > 0.5) + 1;
+%             action = (rand > 0.5) + 1;
+            if obj.transition(obj.choice(end),:)*obj.value>0
+                action=1;
+            else
+                action=2;
+            end
         end
         
-        function [pastChoice, pastResult] = updateAgent(obj, results)
+        function [] = updateAgent(obj, results, action)
         % this function should take results (contains every action's result)
         % of last action and update agent. 
         % 拿到上一次action的results（两个option的results都有），更新这个agent，例如更新每种K长度的序列的平均收益
-        
+        obj.choice=[obj.choice,action];        
         
         end
     end
