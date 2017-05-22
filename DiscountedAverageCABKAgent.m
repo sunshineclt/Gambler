@@ -11,7 +11,7 @@ classdef DiscountedAverageCABKAgent < handle
     end
     
     methods
-        function obj = CABKAgent(alpha, k)
+        function obj = DiscountedAverageCABKAgent(alpha, k)
             obj.k = k;
             obj.experience = zeros(2^k, 1); 
             obj.sequence = 0;

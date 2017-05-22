@@ -1,4 +1,4 @@
-classdef DiscountedAverageCABKAgent < handle
+classdef SeparateDiscountedAverageCABKAgent < handle
         
     properties
         k % length of the sequence
@@ -12,7 +12,7 @@ classdef DiscountedAverageCABKAgent < handle
     end
     
     methods
-        function obj = CABKAgent(alpha, k)
+        function obj = SeparateDiscountedAverageCABKAgent(alpha, k)
             obj.k = k;
             obj.experience = zeros(2^k, 1); 
             obj.sequence = 0;

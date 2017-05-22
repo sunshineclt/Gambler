@@ -2,7 +2,7 @@ env = TwoOptionsEnv(10, -1, [0.7 0.1 0.1 0.1;
                              0.1 0.7 0.1 0.1;
                              0.1 0.1 0.7 0.1;
                              0.1 0.1 0.1 0.7]);
-agent = CABKAgent(2);
+agent = CABKAgent(0.5, 2);
 
 reward = 0;
 for i = 1:100
