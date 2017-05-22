@@ -26,7 +26,7 @@ classdef DisAvrAgent < handle
                 action = 2;
             end
             if obj.Qrisky == obj.Qsafe
-                action = randi(2);
+                action = (rand > 0.5) + 1;
             end
         end
         
