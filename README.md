@@ -1,5 +1,5 @@
 # Gambler
-This repository is to reimplement the model in 《Reliance on Small Samples, the Wavy Recency Effect, and Similarity-Based Learning》 as the final project of Mathematical Modeling in 2017 fall. 
+This repository is to reimplement the model in 《Reliance on Small Samples, the Wavy Recency Effect, and Similarity-Based Learning�?as the final project of Mathematical Modeling in 2017 fall. 
 
 ## Code Structure
 There are three main parts of this project. 

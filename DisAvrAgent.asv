@@ -25,9 +25,8 @@ classdef DisAvrAgent < handle
             if obj.Qrisky < obj.Qsafe
                 action = 2;
             end
-            if obj.Qrisky == obj.Qsafe
-                action = randi(2);
-            end
+            if obj.Qrisk = obj.Qsafe
+                action = randi(2)
         end
         
         function [] = updateAgent(obj, V)
