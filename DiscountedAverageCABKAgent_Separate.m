@@ -32,8 +32,10 @@ classdef DiscountedAverageCABKAgent < handle
         function [] = updateAgent(obj, results)
             obj.trial = obj.trial + 1;
             if obj.trial > obj.k
-                obj.Separate_Trial = obj.Separate_Trial + 1;
-                obj.experience(obj.sequence + 1) = (1 - 1 / (obj.Separate_Trial^obj.alpha)) * obj.experience(obj.sequence + 1) + 1 / (obj.Separate_Trial^obj.alpha) * results(1);
+                obj.Separate_Trial(obj.sequence + 1) = obj.Separate_Trial(obj.sequence + 1) + 1;
+                obj.experience(obj.sequence + 1) = ...
+                (1 - 1 / (obj.Separate_Trial(obj.sequence + 1)^obj.alpha)) * obj.experience(obj.sequence + 1) ...
+                + 1 / (obj.Separate_Trial(obj.sequence + 1)^obj.alpha) * results(1);
             end
             obj.sequence = mod(obj.sequence, 2 ^ (obj.k - 1)) * 2 + (results(1) > results(2));
         end
