@@ -1,6 +1,25 @@
-ProbNum = 1;
-TrialNum = 500000; % Trial Number should take 50000 and 100 seperately
+%% agent setting
+FIBA = FIBAgent(Vgain, Vloss, transition);
+FP = DisAvrAgent(1); FP_OpTrial = 0;
+DisAvr1 = DisAvrAgent(0); DA1_OpTrial = 0;
+DisAvr2 = DisAvrAgent(0.25); DA2_OpTrial = 0;
+DisAvr3 = DisAvrAgent(0.5); DA3_OpTrial = 0;
+DisAvr4 = DisAvrAgent(0.75); DA4_OpTrial = 0;
+DisAvr5 = DisAvrAgent(0.9); DA5_OpTrial = 0;
+CABk1 = CABKAgent(1); CABk1_OpTrial = 0;
+CABk2 = CABKAgent(2); CABk2_OpTrial = 0;
+CABk3 = CABKAgent(3); CABk3_OpTrial = 0;
+CABk4 = CABKAgent(4); CABk4_OpTrial = 0;
+CABk5 = CABKAgent(5); CABk5_OpTrial = 0;
+CABk6 = CABKAgent(6); CABk6_OpTrial = 0;
+FIBA_reward = 0;
+FP_reward = 0; DisAvr1_reward = 0; DisAvr2_reward = 0;
+DisAvr3_reward = 0; DisAvr4_reward = 0; DisAvr5_reward = 0;
+CABk1_reward = 0; CABk2_reward = 0; CABk3_reward = 0;
+CABk4_reward = 0; CABk5_reward = 0; CABk6_reward = 0;
 
+ProbNum = 1;
+TrialNum = 50000; % Trial Number should take 50000 and 100 seperately
 for prob = 1:ProbNum
     %% game environment parameters
     transition = zeros(4,4);
@@ -13,30 +32,9 @@ for prob = 1:ProbNum
             end
         end
     end
-    
-    %% agent setting
     Vgain = randi([1,20]);
     Vloss = randi([-20,-1]);
     env = TwoOptionsEnv(Vgain, Vloss, transition);
-    FIBA = FIBAgent(Vgain, Vloss, transition);
-    FP = DisAvrAgent(1); FP_OpTrial = 0;
-    DisAvr1 = DisAvrAgent(0); DA1_OpTrial = 0;
-    DisAvr2 = DisAvrAgent(0.25); DA2_OpTrial = 0;
-    DisAvr3 = DisAvrAgent(0.5); DA3_OpTrial = 0;
-    DisAvr4 = DisAvrAgent(0.75); DA4_OpTrial = 0;
-    DisAvr5 = DisAvrAgent(0.9); DA5_OpTrial = 0;
-    CABk1 = CABKAgent(1); CABk1_OpTrial = 0;
-    CABk2 = CABKAgent(2); CABk2_OpTrial = 0;
-    CABk3 = CABKAgent(3); CABk3_OpTrial = 0;
-    CABk4 = CABKAgent(4); CABk4_OpTrial = 0;
-    CABk5 = CABKAgent(5); CABk5_OpTrial = 0;
-    CABk6 = CABKAgent(6); CABk6_OpTrial = 0;
-    FIBA_reward = 0;
-    FP_reward = 0; DisAvr1_reward = 0; DisAvr2_reward = 0;
-    DisAvr3_reward = 0; DisAvr4_reward = 0; DisAvr5_reward = 0;
-    CABk1_reward = 0; CABk2_reward = 0; CABk3_reward = 0;
-    CABk4_reward = 0; CABk5_reward = 0; CABk6_reward = 0;
-    
     %% trials for each problem and agents take actions
     for trial = 1:TrialNum
         % FIBA
@@ -131,7 +129,7 @@ for prob = 1:ProbNum
         if CABk6_action == FIBA_action
             CABk6_OpTrial = CABk6_OpTrial+1;
         end
-    end   
+    end
 end
 
 %% result computing
