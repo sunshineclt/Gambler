@@ -1,5 +1,5 @@
-ProbNum = 10000;
-TrialNum = 50000; % Trial Number should take 50000 and 100 seperately
+ProbNum = 10;
+TrialNum = 50; % Trial Number should take 50000 and 100 seperately
 
 for prob = 1:ProbNum
     %% game environment parameters
@@ -137,27 +137,14 @@ end
 %% result computing
 % optimal trial percent
 FP_OpTrialPer = FP_OpTrial / (ProbNum*TrialNum);
-DisAvr1_OpTrialPer = DA1_OpTrial / (ProbNum*TrialNum);
-DisAvr2_OpTrialPer = DA2_OpTrial / (ProbNum*TrialNum);
-DisAvr3_OpTrialPer = DA3_OpTrial / (ProbNum*TrialNum);
-DisAvr4_OpTrialPer = DA4_OpTrial / (ProbNum*TrialNum);
-DisAvr5_OpTrialPer = DA5_OpTrial / (ProbNum*TrialNum);
-CABk1_OpTrialPer = CABk1_OpTrial / (ProbNum*TrialNum);
-CABk2_OpTrialPer = CABk2_OpTrial / (ProbNum*TrialNum);
-CABk3_OpTrialPer = CABk3_OpTrial / (ProbNum*TrialNum);
-CABk4_OpTrialPer = CABk4_OpTrial / (ProbNum*TrialNum);
-CABk5_OpTrialPer = CABk5_OpTrial / (ProbNum*TrialNum);
-CABk6_OpTrialPer = CABk6_OpTrial / (ProbNum*TrialNum);
+DisAvr_OpTrialPer = [DA1_OpTrial / (ProbNum*TrialNum),DA2_OpTrial / (ProbNum*TrialNum),...
+    DA3_OpTrial / (ProbNum*TrialNum),DA4_OpTrial / (ProbNum*TrialNum),DA5_OpTrial / (ProbNum*TrialNum)];
+CABk_OpTrialPer = [CABk1_OpTrial / (ProbNum*TrialNum),CABk2_OpTrial / (ProbNum*TrialNum)...
+    CABk3_OpTrial / (ProbNum*TrialNum),CABk4_OpTrial / (ProbNum*TrialNum),...
+    CABk5_OpTrial / (ProbNum*TrialNum),CABk6_OpTrial / (ProbNum*TrialNum)];
 % mean payoff
 FP_MPayoff = mean(FP_reward);
-DisAvr1_MPayoff = mean(DisAvr1_reward);
-DisAvr2_MPayoff = mean(DisAvr2_reward);
-DisAvr3_MPayoff = mean(DisAvr3_reward);
-DisAvr4_MPayoff = mean(DisAvr4_reward);
-DisAvr5_MPayoff = mean(DisAvr5_reward);
-CABk1_MPayoff = mean(CABk1_reward);
-CABk2_MPayoff = mean(CABk2_reward);
-CABk3_MPayoff = mean(CABk3_reward);
-CABk4_MPayoff = mean(CABk4_reward);
-CABk5_MPayoff = mean(CABk5_reward);
-CABk6_MPayoff = mean(CABk6_reward);
+DisAvr_MPayoff = [mean(DisAvr1_reward),mean(DisAvr2_reward),mean(DisAvr3_reward),...
+    mean(DisAvr4_reward),mean(DisAvr5_reward)];
+CABk_MPayoff = [mean(CABk1_reward),mean(CABk2_reward),mean(CABk3_reward),...
+    mean(CABk4_reward),mean(CABk5_reward),mean(CABk6_reward)];
