@@ -1,5 +1,5 @@
-ProbNum = 10;
-TrialNum = 50; % Trial Number should take 50000 and 100 seperately
+ProbNum = 1;
+TrialNum = 500000; % Trial Number should take 50000 and 100 seperately
 
 for prob = 1:ProbNum
     %% game environment parameters
@@ -143,8 +143,16 @@ CABk_OpTrialPer = [CABk1_OpTrial / (ProbNum*TrialNum),CABk2_OpTrial / (ProbNum*T
     CABk3_OpTrial / (ProbNum*TrialNum),CABk4_OpTrial / (ProbNum*TrialNum),...
     CABk5_OpTrial / (ProbNum*TrialNum),CABk6_OpTrial / (ProbNum*TrialNum)];
 % mean payoff
+FIBA_MPayoff = mean(FIBA_reward);
 FP_MPayoff = mean(FP_reward);
 DisAvr_MPayoff = [mean(DisAvr1_reward),mean(DisAvr2_reward),mean(DisAvr3_reward),...
     mean(DisAvr4_reward),mean(DisAvr5_reward)];
 CABk_MPayoff = [mean(CABk1_reward),mean(CABk2_reward),mean(CABk3_reward),...
     mean(CABk4_reward),mean(CABk5_reward),mean(CABk6_reward)];
+fprintf('FP agent optimal trial percent = %f\n',FP_OpTrialPer);
+fprintf('Discouted average agent optimal trial percent = %f\n',DisAvr_OpTrialPer);
+fprintf('CABk agent optimal trial percent = %f\n',CABk_OpTrialPer);
+fprintf('FIBA mean payoff = %f\n',FIBA_MPayoff);
+fprintf('FP mean payoff = %f\n',FP_MPayoff);
+fprintf('Discounted average mean payoff = %f\n',DisAvr_MPayoff);
+fprintf('CABk mean payoff = %f\n',CABk_MPayoff);
