@@ -28,8 +28,12 @@ classdef FIBAgent < handle
             else
                 if expectation < obj.safe
                     action = 2;
-                else
+                end
+                if expectation > obj.safe
                     action = 1;
+                end
+                if expectation == obj.safe
+                    action = (rand > 0.5) + 1;
                 end
             end
         end
