@@ -20,9 +20,11 @@ classdef TwoOptionsEnv < handle
     methods
         function obj = TwoOptionsEnv(number_of_state, gain, loss, transition)
         % Constructor
+            assert(number_of_state == size(transition, 1));
+            assert(number_of_state == size(transition, 2));
             obj.number_of_state = number_of_state;
             obj.status = randi(number_of_state);
-            obj.value = [repmat([gain], [1, number_of_state / 2]), repmat([loss], [1, number_of_state / 2])];
+            obj.value = [repmat(gain, [1, number_of_state / 2]), repmat(loss, [1, number_of_state / 2])];
             obj.transition = transition;
         end
         
