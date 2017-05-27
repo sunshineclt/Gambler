@@ -1,4 +1,4 @@
-clc;clear;close all;fclose all;
+clc; clear; close all; fclose all;
 %%
 addpath(genpath('../Gambler/agent'));
 addpath(genpath('../Gambler/env'));
@@ -11,7 +11,7 @@ pGainRate = [];% Record the pGain changing rate of 10000 problems
 relativePayment = [];% Record the relative performance of each agents at 10000 problems
 
 for prob = 1:ProbNum
-    % set up env    
+    % set up env
     Vgain = randi([1, 20]);
     Vloss = randi([-20, -1]);
     state = 4;
@@ -27,18 +27,18 @@ for prob = 1:ProbNum
 
     % % agent setting
     FIBA = FIBAgent(Vgain, Vloss, transition);
-    FP = DisAvrAgent(1); FP_OpTrial = 0;
-    DisAvr1 = DisAvrAgent(0); DA1_OpTrial = 0;
-    DisAvr2 = DisAvrAgent(0.25); DA2_OpTrial = 0;
-    DisAvr3 = DisAvrAgent(0.5); DA3_OpTrial = 0;
-    DisAvr4 = DisAvrAgent(0.75); DA4_OpTrial = 0;
-    DisAvr5 = DisAvrAgent(0.9); DA5_OpTrial = 0;
-    CABk1 = CABKAgent(1); CABk1_OpTrial = 0;
-    CABk2 = CABKAgent(2); CABk2_OpTrial = 0;
-    CABk3 = CABKAgent(3); CABk3_OpTrial = 0;
-    CABk4 = CABKAgent(4); CABk4_OpTrial = 0;
-    CABk5 = CABKAgent(5); CABk5_OpTrial = 0;
-    CABk6 = CABKAgent(6); CABk6_OpTrial = 0;
+    FP = DisAvrAgent(1);
+    DisAvr1 = DisAvrAgent(0);
+    DisAvr2 = DisAvrAgent(0.25);
+    DisAvr3 = DisAvrAgent(0.5);
+    DisAvr4 = DisAvrAgent(0.75);
+    DisAvr5 = DisAvrAgent(0.9);
+    CABk1 = CABKAgent(1);
+    CABk2 = CABKAgent(2);
+    CABk3 = CABKAgent(3);
+    CABk4 = CABKAgent(4);
+    CABk5 = CABKAgent(5);
+    CABk6 = CABKAgent(6);
 %     FIBA_reward = [];
 %     FP_reward = []; DisAvr1_reward = []; DisAvr2_reward = [];
 %     DisAvr3_reward = []; DisAvr4_reward = []; DisAvr5_reward = [];
