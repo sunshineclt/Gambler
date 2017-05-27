@@ -20,7 +20,7 @@ classdef UnboundedStatesTwoOptionsEnv < handle
     end
     
     methods
-        function obj = ChangingTwoOptionsEnv(gain, loss, psame, alpha, beta)
+        function obj = UnboundedStatesTwoOptionsEnv(gain, loss, psame, alpha, beta)
         % Constructor
             obj.loss = loss;
             obj.gain = gain;
