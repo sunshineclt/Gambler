@@ -1,3 +1,5 @@
+clear;
+
 problem_count = 10000;
 trial_count = 50000;
 
@@ -40,8 +42,12 @@ for problem = 1:problem_count
     optimal = zeros(1, agent_count);
     
     for i = 1:trial_count
-        action_FIBA = agent.chooseAction();
-        for j = 1:agent_count
+        action_FIBA = agents{1}.chooseAction();
+        [result, whole_result] = env.getResult(action_FIBA);
+        agents{1}.updateAgent(whole_result);
+        rewards(1) = rewards(1) + result;
+        optimal(1) = optimal(1) + 1;
+        for j = 2:agent_count
             agent = agents{j};
             action = agent.chooseAction();
             [result, whole_result] = env.getResult(action);
