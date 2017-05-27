@@ -10,10 +10,10 @@ classdef FIBAgent < handle
     methods
         function obj = FIBAgent(gain, loss, transition)
             obj.status_num = size(transition, 1);
-            obj.value=[repmat(gain, [obj.status_num / 2, 1]), repmat(loss, [obj.status_num / 2, 1])];
+            obj.value=[repmat(gain, [obj.status_num / 2], 1); repmat(loss, [obj.status_num / 2, 1])];
             obj.transition = transition;
             obj.safe=0;
-            obj.probability=repmat(1 / n, [n, 1]);
+            obj.probability=repmat(1 / obj.status_num, [1, obj.status_num]);
             % in the first trial the n probabilities are equal
             
             % 这里我着重说明一下，因为在第一个试次中n个状态概率均等
