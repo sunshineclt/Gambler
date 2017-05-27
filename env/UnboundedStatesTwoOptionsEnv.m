@@ -30,12 +30,13 @@ classdef UnboundedStatesTwoOptionsEnv < handle
             obj.beta = beta;
         end
         
-        function [result, whole_result] = step(obj, action)
-        % take an action, give a result and then transite interal state
+        function [result, whole_result] = getResult(obj, action)
+        % Take an action, give a result, but not transit pgain. 
+        % For pgain transition, see `transit` 
         % Parameter: action 1 = risky, action 2 = safe
         % Return: 
         %   result: the chosen action's result
-        %   whole_result: two actions's result     
+        %   whole_result: two actions's result   
             if rand <= obj.pgain
                 risky = obj.gain;
             else
@@ -48,6 +49,10 @@ classdef UnboundedStatesTwoOptionsEnv < handle
                 result = 0;
                 whole_result = [risky, 0];
             end
+        end
+        
+        function [] = transit(obj)
+        % Transit pgain
             if rand > obj.psame
                 obj.pgain = betarnd(obj.alpha, obj.beta);
             end

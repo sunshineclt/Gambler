@@ -6,7 +6,7 @@ classdef TwoOptionsEnv < handle
     % time. 
     % Option 1 has an internal state which indicates whether it will output 
     % gain or loss. This internal state has Markov property and thus after 
-    % every action it will transite to a new state according to transition
+    % every action it will transit to a new state according to transition
     % matrix. 
     % In this env, the number of state is appointed in the constructor. 
     
@@ -28,12 +28,13 @@ classdef TwoOptionsEnv < handle
             obj.transition = transition;
         end
         
-        function [result, whole_result] = step(obj, action)
-        % take an action, give a result and then transite interal state
+        function [result, whole_result] = getResult(obj, action)
+        % Take an action, give a result, but not transit internal state. 
+        % For state transition, see `transit` 
         % Parameter: action 1 = risky, action 2 = safe
         % Return: 
         %   result: the chosen action's result
-        %   whole_result: two actions's result     
+        %   whole_result: two actions's result   
             risky = obj.value(obj.status);
             if action == 1
                 result = risky;
@@ -42,6 +43,10 @@ classdef TwoOptionsEnv < handle
                 result = 0;
                 whole_result = [risky, 0];
             end
+        end
+        
+        function [] = transit(obj)
+        % Transit interal state
             ran = rand;
             cp = cumsum(obj.transition(obj.status, :));
             obj.status = sum(cp < ran)+1;
