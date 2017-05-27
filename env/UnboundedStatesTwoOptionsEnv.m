@@ -1,15 +1,20 @@
-classdef ChangingTwoOptionsEnv < handle
-    % CHANGINGTWOOPTIONSENV is a game env that have 2 options for player to 
-    % choose. 
+classdef UnboundedStatesTwoOptionsEnv < handle
+    % UNBOUNDEDSTATESTWOOPTIONSENV is a game env that have 2 options for 
+    % player to choose. 
     % Option 1 is a risky option which means to have a probability to gain
     % and a probability to loss
     % Option 2 is a safe option which means to have a 0 payoff all the time
+    % This env do not have state or transition matrix. Instead it has the
+    % `pgain` to indicate the probability of gain. And after each action,
+    % it will modify `pgain` with the probability `1 - psame`, and if
+    % modified, the new `pgain` will be drawn from a beta distribution
+    % whose parameter is alpha and beta. 
     
     properties
         loss % loss amount of risky choice
         pgain % probability of gain
         gain % gain amount of risky choice
-        psame % probability of remain pgain
+        psame % probability of unchanged pgain
         alpha % alpha parameter for beta distribution
         beta % beta parameter for beta distribution
     end
@@ -26,11 +31,11 @@ classdef ChangingTwoOptionsEnv < handle
         end
         
         function [result, whole_result] = step(obj, action)
-        % take an action, give a result and then transite its interal state
+        % take an action, give a result and then transite interal state
         % Parameter: action 1 = risky, action 2 = safe
         % Return: 
-        %   result: this action's result
-        %   whole_result: two actions's result  
+        %   result: the chosen action's result
+        %   whole_result: two actions's result     
             if rand <= obj.pgain
                 risky = obj.gain;
             else
