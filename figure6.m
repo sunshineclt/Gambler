@@ -1,5 +1,8 @@
 clc;clear;close all;fclose all;
 %%
+addpath(genpath('../Gambler/agent'));
+addpath(genpath('../Gambler/env'));
+
 ProbNum = 20;
 TrialNum = 100; % Trial Number should take 50000 and 100 seperately
 payment = [];% Record the payment of each agents at 10000 problems
@@ -8,20 +11,18 @@ pGainRate = [];% Record the pGain changing rate of 10000 problems
 relativePayment = [];% Record the relative performance of each agents at 10000 problems
 
 for prob = 1:ProbNum
-    % % game environment parameters
-    transition = zeros(4,4);
-    for row = 1:4
-        temp = 1-rand*0.75;
-        transition(row,randi(4)) = temp;
-        for col = 1:4
-            if transition(row,col) == 0
-                transition(row,col) = (1-temp)/3;
-            end
-        end
+    % set up env    
+    Vgain = randi([1, 20]);
+    Vloss = randi([-20, -1]);
+    state = 4;
+    transition = zeros(state, state);
+    for row = 1:state
+        column = randi([1, state]);
+        unique = 1 - rand() / state;
+        transition(row, :) = (1 - unique) / (state - 1);
+        transition(row, column) = unique;
     end
-    Vgain = randi([1,20]);
-    Vloss = randi([-20,-1]);
-    env = TwoOptionsEnv(Vgain, Vloss, transition);
+    env = TwoOptionsEnv(state, Vgain, Vloss, transition);
     pGain = [];
 
     % % agent setting
@@ -53,14 +54,14 @@ for prob = 1:ProbNum
     for trial = 1:TrialNum
         % % FIBA
         FIBA_action = FIBA.chooseAction();
-        [result, whole_result] = env.step(FIBA_action);
+        [result, whole_result] = env.getResult(FIBA_action);
 %         FIBA_reward = [FIBA_reward, result];
         FIBA_reward = FIBA_reward + result;
         FIBA.updateAgent(whole_result);
         pGain = [pGain; FIBA.probability(1)+FIBA.probability(2)];
         % % FP
         FP_action = FP.chooseAction();
-        [result, whole_result] = env.step(FP_action);
+        [result, whole_result] = env.getResult(FP_action);
 %         FP_reward = [FP_reward, result];
         FP_reward = FP_reward + result;
         FP.updateAgent(whole_result);
@@ -69,7 +70,7 @@ for prob = 1:ProbNum
 %         end
         % % DisAvr
         DisAvr1_action = DisAvr1.chooseAction();
-        [result, whole_result] = env.step(DisAvr1_action);
+        [result, whole_result] = env.getResult(DisAvr1_action);
 %         DisAvr1_reward = [DisAvr1_reward, result];
         DisAvr1_reward = DisAvr1_reward + result;
         DisAvr1.updateAgent(whole_result);
@@ -77,7 +78,7 @@ for prob = 1:ProbNum
 %             DA1_OpTrial = DA1_OpTrial+1;
 %         end
         DisAvr2_action = DisAvr2.chooseAction();
-        [result, whole_result] = env.step(DisAvr2_action);
+        [result, whole_result] = env.getResult(DisAvr2_action);
 %         DisAvr2_reward = [DisAvr2_reward, result];
         DisAvr2_reward = DisAvr1_reward + result;
         DisAvr2.updateAgent(whole_result);
@@ -85,7 +86,7 @@ for prob = 1:ProbNum
 %             DA2_OpTrial = DA2_OpTrial+1;
 %         end
         DisAvr3_action = DisAvr3.chooseAction();
-        [result, whole_result] = env.step(DisAvr3_action);
+        [result, whole_result] = env.getResult(DisAvr3_action);
 %         DisAvr3_reward = [DisAvr3_reward, result];
         DisAvr3_reward = DisAvr1_reward + result;
         DisAvr3.updateAgent(whole_result);
@@ -93,7 +94,7 @@ for prob = 1:ProbNum
 %             DA3_OpTrial = DA3_OpTrial+1;
 %         end
         DisAvr4_action = DisAvr4.chooseAction();
-        [result, whole_result] = env.step(DisAvr4_action);
+        [result, whole_result] = env.getResult(DisAvr4_action);
 %         DisAvr4_reward = [DisAvr4_reward, result];
         DisAvr4_reward = DisAvr1_reward + result;
         DisAvr4.updateAgent(whole_result);
@@ -101,7 +102,7 @@ for prob = 1:ProbNum
 %             DA4_OpTrial = DA4_OpTrial+1;
 %         end
         DisAvr5_action = DisAvr5.chooseAction();
-        [result, whole_result] = env.step(DisAvr5_action);
+        [result, whole_result] = env.getResult(DisAvr5_action);
 %         DisAvr5_reward = [DisAvr5_reward, result];
         DisAvr5_reward = DisAvr1_reward + result;
         DisAvr5.updateAgent(whole_result);
@@ -110,7 +111,7 @@ for prob = 1:ProbNum
 %         end
         % % CABk
         CABk1_action = CABk1.chooseAction();
-        [result, whole_result] = env.step(CABk1_action);
+        [result, whole_result] = env.getResult(CABk1_action);
 %         CABk1_reward = [CABk1_reward, result];
         CABk1_reward = CABk1_reward + result;
         CABk1.updateAgent(whole_result);
@@ -118,7 +119,7 @@ for prob = 1:ProbNum
 %             CABk1_OpTrial = CABk1_OpTrial+1;
 %         end
         CABk2_action = CABk2.chooseAction();
-        [result, whole_result] = env.step(CABk2_action);
+        [result, whole_result] = env.getResult(CABk2_action);
 %         CABk2_reward = [CABk2_reward, result];
         CABk2_reward = CABk1_reward + result;
         CABk2.updateAgent(whole_result);
@@ -126,7 +127,7 @@ for prob = 1:ProbNum
 %             CABk2_OpTrial = CABk2_OpTrial+1;
 %         end
         CABk3_action = CABk3.chooseAction();
-        [result, whole_result] = env.step(CABk3_action);
+        [result, whole_result] = env.getResult(CABk3_action);
 %         CABk3_reward = [CABk3_reward, result];
         CABk3_reward = CABk1_reward + result;
         CABk3.updateAgent(whole_result);
@@ -134,7 +135,7 @@ for prob = 1:ProbNum
 %             CABk3_OpTrial = CABk3_OpTrial+1;
 %         end
         CABk4_action = CABk4.chooseAction();
-        [result, whole_result] = env.step(CABk4_action);
+        [result, whole_result] = env.getResult(CABk4_action);
 %         CABk4_reward = [CABk4_reward, result];
         CABk4_reward = CABk1_reward + result;
         CABk4.updateAgent(whole_result);
@@ -142,7 +143,7 @@ for prob = 1:ProbNum
 %             CABk4_OpTrial = CABk4_OpTrial+1;
 %         end
         CABk5_action = CABk5.chooseAction();
-        [result, whole_result] = env.step(CABk5_action);
+        [result, whole_result] = env.getResult(CABk5_action);
 %         CABk5_reward = [CABk5_reward, result];
         CABk5_reward = CABk1_reward + result;
         CABk5.updateAgent(whole_result);
@@ -150,7 +151,7 @@ for prob = 1:ProbNum
 %             CABk5_OpTrial = CABk5_OpTrial+1;
 %         end
         CABk6_action = CABk6.chooseAction();
-        [result, whole_result] = env.step(CABk6_action);
+        [result, whole_result] = env.getResult(CABk6_action);
 %         CABk6_reward = [CABk6_reward, result];
         CABk6_reward = CABk1_reward + result;
         CABk6.updateAgent(whole_result);
