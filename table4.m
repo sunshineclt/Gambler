@@ -57,3 +57,5 @@ for problem = 1:problem_count
     optimal_record(problem, :) = optimal / trial_count;
     disp(problem);
 end
+
+save('table4.mat', 'reward_record', 'optimal_record');
