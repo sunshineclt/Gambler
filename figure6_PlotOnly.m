@@ -29,16 +29,16 @@ figure1 = figure('PaperType','usletter',...
 
 ax1 = axes('Parent',figure1,'LineWidth',1,...
      'Layer','top','FontSize',10,'box','off','color','none',...
-     'YAxisLocation','left','position',[0.2 0.65 0.6 0.25]);
+     'XColor','k','YColor','k','YAxisLocation','left','position',[0.2 0.65 0.6 0.25]);
 hold on;
 
-p1 = plot(relativeRewards(:,1),'-','color',cmp(1,:),'linewidth',2);
-p2 = plot(relativeRewards(:,2),'-','color',cmp(2,:),'linewidth',2);
-p3 = plot(relativeRewards(:,3),'-','color',cmp(3,:),'linewidth',2);
-p4 = plot(relativeRewards(:,4),'-','color',cmp(4,:),'linewidth',2);
-p5 = plot(relativeRewards(:,5),'-','color',cmp(5,:),'linewidth',2);
-p6 = plot(relativeRewards(:,6),'-','color',cmp(6,:),'linewidth',2);
-p7 = plot(relativeRewards(:,7),'-','color',cmp(7,:),'linewidth',2);
+p1 = plot(fliplr(relativeRewards(:,1)),'-','color',cmp(1,:),'linewidth',2);
+p2 = plot(fliplr(relativeRewards(:,2)),'-','color',cmp(2,:),'linewidth',2);
+p3 = plot(fliplr(relativeRewards(:,3)),'-','color',cmp(3,:),'linewidth',2);
+p4 = plot(fliplr(relativeRewards(:,4)),'-','color',cmp(4,:),'linewidth',2);
+p5 = plot(fliplr(relativeRewards(:,5)),'-','color',cmp(5,:),'linewidth',2);
+p6 = plot(fliplr(relativeRewards(:,6)),'-','color',cmp(6,:),'linewidth',2);
+p7 = plot(fliplr(relativeRewards(:,7)),'-','color',cmp(7,:),'linewidth',2);
 
 l1 = legend([p1 p2 p3 p4 p5 p6 p7],'FP','\alpha = 0.25','\alpha = 0.5','\alpha = 0.75','CAB-1','CAB-2','CAB-3');
 set(l1,'location','eastoutside','box','off');
@@ -56,7 +56,7 @@ title('100 Trails','FontName','Times New Roman','Fontsize',10);
 
 ax2 = axes('Parent',figure1,'LineWidth',1,...
      'Layer','top','FontSize',10,'box','off','color','none',...
-     'YAxisLocation','left','position',[0.05 0.45 0.2 0.12]);
+     'XColor','k','YColor','k','YAxisLocation','left','position',[0.05 0.45 0.2 0.12]);
 hold on;
 s1 = randi([1, 10000]);
 p1 = plot(pGainAll(8910, :, 2),'-k','linewidth',1);
@@ -73,7 +73,7 @@ title('2nd Decile','FontName','Times New Roman','Fontsize',10);
 
 ax3 = axes('Parent',figure1,'LineWidth',1,...
      'Layer','top','FontSize',10,'box','off','color','none',...
-     'YAxisLocation','left','position',[0.3 0.45 0.2 0.12]);
+     'XColor','k','YColor','k','YAxisLocation','left','position',[0.3 0.45 0.2 0.12]);
 hold on;
 s2 = randi([1, 10000]);
 p1 = plot(pGainAll(3404, :, 4),'-k','linewidth',1);
@@ -90,7 +90,7 @@ title('4nd Decile','FontName','Times New Roman','Fontsize',10);
 
 ax4 = axes('Parent',figure1,'LineWidth',1,...
      'Layer','top','FontSize',10,'box','off','color','none',...
-     'YAxisLocation','left','position',[0.55 0.45 0.2 0.12]);
+     'XColor','k','YColor','k','YAxisLocation','left','position',[0.55 0.45 0.2 0.12]);
 hold on;
 s3 = randi([1, 10000]);
 p1 = plot(pGainAll(3113, :, 6),'-k','linewidth',1);
@@ -107,7 +107,7 @@ title('6nd Decile','FontName','Times New Roman','Fontsize',10);
 
 ax5 = axes('Parent',figure1,'LineWidth',1,...
      'Layer','top','FontSize',10,'box','off','color','none',...
-     'YAxisLocation','left','position',[0.80 0.45 0.2 0.12]);
+     'XColor','k','YColor','k','YAxisLocation','left','position',[0.80 0.45 0.2 0.12]);
 hold on;
 s4 = randi([1, 10000]);
 p1 = plot(pGainAll(4984, :, 8),'-k','linewidth',1);
