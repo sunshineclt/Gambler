@@ -58,7 +58,8 @@ ax2 = axes('Parent',figure1,'LineWidth',1,...
      'Layer','top','FontSize',10,'box','off','color','none',...
      'YAxisLocation','left','position',[0.05 0.45 0.2 0.12]);
 hold on;
-p1 = plot(pGainAll(randi([1, 10000]), :, 2),'-k','linewidth',1);
+s1 = randi([1, 10000]);
+p1 = plot(pGainAll(8910, :, 2),'-k','linewidth',1);
 ylim([0 1]);
 xlim([1 100]);
 set(gca,'FontName','Times New Roman','TickDir','out',...
@@ -74,7 +75,8 @@ ax3 = axes('Parent',figure1,'LineWidth',1,...
      'Layer','top','FontSize',10,'box','off','color','none',...
      'YAxisLocation','left','position',[0.3 0.45 0.2 0.12]);
 hold on;
-p1 = plot(pGainAll(randi([1, 10000]), :, 4),'-k','linewidth',1);
+s2 = randi([1, 10000]);
+p1 = plot(pGainAll(3404, :, 4),'-k','linewidth',1);
 ylim([0 1]);
 xlim([1 TrialNum]);
 set(gca,'FontName','Times New Roman','TickDir','out',...
@@ -90,7 +92,8 @@ ax4 = axes('Parent',figure1,'LineWidth',1,...
      'Layer','top','FontSize',10,'box','off','color','none',...
      'YAxisLocation','left','position',[0.55 0.45 0.2 0.12]);
 hold on;
-p1 = plot(pGainAll(randi([1, 10000]), :, 6),'-k','linewidth',1);
+s3 = randi([1, 10000]);
+p1 = plot(pGainAll(3113, :, 6),'-k','linewidth',1);
 ylim([0 1]);
 xlim([1 TrialNum]);
 set(gca,'FontName','Times New Roman','TickDir','out',...
@@ -106,7 +109,8 @@ ax5 = axes('Parent',figure1,'LineWidth',1,...
      'Layer','top','FontSize',10,'box','off','color','none',...
      'YAxisLocation','left','position',[0.80 0.45 0.2 0.12]);
 hold on;
-p1 = plot(pGainAll(randi([1, 10000]), :, 8),'-k','linewidth',1);
+s4 = randi([1, 10000]);
+p1 = plot(pGainAll(4984, :, 8),'-k','linewidth',1);
 ylim([0 1]);
 xlim([1 TrialNum]);
 set(gca,'FontName','Times New Roman','TickDir','out',...
