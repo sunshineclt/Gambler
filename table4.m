@@ -1,6 +1,6 @@
 clear;
 
-problem_count = 10000;
+problem_count = 1000;
 trial_count = 50000;
 
 agent_count = 14;
@@ -11,7 +11,7 @@ for problem = 1:problem_count
     % set up env    
     gain = randi([1, 20]);
     loss = randi([-20, -1]);
-    state = 4;
+    state = 10;
     transition = zeros(state);
     for row = 1:state
         column = randi(state);
