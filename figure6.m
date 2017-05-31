@@ -53,11 +53,12 @@ for envs = 1:EnvNum
         Rewards(prob, :, envs) = rewards;
         pGainAll(prob, :, envs) = pGain;
         pGainRate(prob, envs) = mean(abs(diff(pGain)));
-        disp(envs);
+%         disp(envs);
 
     end
+    disp(envs);
     rewardsTemp = mean(Rewards(:, :, envs), 1);
     relativeRewards(envs, :) = rewardsTemp / max(rewardsTemp);
 end
 
-save('fig_6_T100_2','Rewards','relativeRewards','pGainAll','pGainRate');
+save('fig_6_T100_P10000','Rewards','relativeRewards','pGainAll','pGainRate');
