@@ -1,6 +1,6 @@
 clear;
 
-problem_count = 10000;
+problem_count = 1000;
 trial_count = 50000;
 
 agent_count = 13;
