@@ -15,7 +15,7 @@ for problem = 1:problem_count
     transition = zeros(state, state);
     for row = 1:state
         column = randi([1, state]);
-        unique = 1 - rand() / state;
+        unique = rand()*(state-1)/state + 1/state;
         transition(row, :) = (1 - unique) / (state - 1);
         transition(row, column) = unique;
     end
@@ -64,7 +64,6 @@ for problem = 1:problem_count
     disp(problem);
 end
 
-save('table4.mat', 'reward_record', 'optimal_record');
 mpayoff = mean(reward_record);
 optrial_per = mean(optimal_record);
-save('optrial_per', 'mpayoff');
+save('table1.mat', 'reward_record', 'optimal_record','optrial_per', 'mpayoff');
