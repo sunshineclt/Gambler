@@ -12,10 +12,10 @@ for problem = 1:problem_count
     gain = randi([1, 20]);
     loss = randi([-20, -1]);
     state = 4;
-    transition = zeros(state, state);
+    transition = zeros(state);
     for row = 1:state
-        column = randi([1, state]);
-        unique = 1 - rand() / state;
+        column = randi(state);
+        unique = ((state - 1) * rand + 1) / state;
         transition(row, :) = (1 - unique) / (state - 1);
         transition(row, column) = unique;
     end

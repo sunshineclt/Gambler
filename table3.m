@@ -4,8 +4,9 @@ problem_count = 10000;
 trial_count = 50000;
 
 agent_count = 14;
-reward_record = zeros(problem_count, agent_count);
-optimal_record = zeros(problem_count, agent_count);
+gain_probability = zeros(problem_count, agent_count);
+risky_action_probability  = zeros(problem_count, agent_count);
+correlation = zeros(1, agent_count);
 
 for problem = 1:problem_count
     % set up env    
@@ -15,7 +16,7 @@ for problem = 1:problem_count
     transition = zeros(state);
     for row = 1:state
         column = randi(state);
-        unique = ((state - 1) * rand + 1) / state;
+        unique =  ((state - 1) * rand + 1) / state;
         transition(row, :) = (1 - unique) / (state - 1);
         transition(row, column) = unique;
     end
@@ -38,30 +39,26 @@ for problem = 1:problem_count
     CABk6 = CABKAgent(6);
     agents = {FIBA, FP, DisAvr1, DisAvr2, DisAvr3, DisAvr4, DisAvr5, DisAvr6, CABk1, CABk2, CABk3, CABk4, CABk5, CABk6};
     assert(agent_count == size(agents, 2));
-    rewards = zeros(1, agent_count);
-    optimal = zeros(1, agent_count);
+    gain_sum = zeros(1, agent_count);
+    risky_action_sum = zeros(1, agent_count);
     
     for i = 1:trial_count
-        action_FIBA = agents{1}.chooseAction();
-        [result, whole_result] = env.getResult(action_FIBA);
-        agents{1}.updateAgent(whole_result);
-        rewards(1) = rewards(1) + result;
-        optimal(1) = optimal(1) + 1;
-        for j = 2:agent_count
+        for j = 1:agent_count
             agent = agents{j};
             action = agent.chooseAction();
+            risky_action_sum(j) = risky_action_sum(j) + (action == 1);
             [result, whole_result] = env.getResult(action);
+            gain_sum(j) = gain_sum(j) + (whole_result(1) > 0);
             agent.updateAgent(whole_result);
-            rewards(j) = rewards(j) + result;
-            optimal(j) = optimal(j) + (action == action_FIBA);
         end
         env.transit();
     end
-    rewards  = rewards / trial_count;
-    % disp(rewards);
-    reward_record(problem, :) = rewards;
-    optimal_record(problem, :) = optimal / trial_count;
+    gain_probability(problem, :)  = gain_sum / trial_count;
+    risky_action_probability(problem, :) = risky_action_sum / trial_count;
     disp(problem);
 end
 
-save('table4.mat', 'reward_record', 'optimal_record');
+for i = 1:agent_count
+    correlation(i) = corr(gain_probability(:, i), risky_action_probability(:, i), 'type', 'pearson');
+end
+save('table3.mat', 'correlation');
