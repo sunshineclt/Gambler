@@ -1,6 +1,6 @@
 clear;
 
-problem_count = 10000;
+problem_count = 1000;
 trial_count = 50000;
 
 agent_count = 14;
@@ -11,11 +11,11 @@ for problem = 1:problem_count
     % set up env    
     gain = randi([1, 20]);
     loss = randi([-20, -1]);
-    state = 4;
-    transition = zeros(state, state);
+    state = 10;
+    transition = zeros(state);
     for row = 1:state
-        column = randi([1, state]);
-        unique = 1 - rand() / state;
+        column = randi(state);
+        unique = ((state - 1) * rand + 1) / state;
         transition(row, :) = (1 - unique) / (state - 1);
         transition(row, column) = unique;
     end
