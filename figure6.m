@@ -3,8 +3,8 @@ clc; clear; close all; fclose all;
 addpath(genpath('../Gambler/agent'));
 addpath(genpath('../Gambler/env'));
 
-ProbNum = 10000;
-TrialNum = 100; % Trial Number should take 50000 and 100 seperately
+ProbNum = 1000;
+TrialNum = 50000; % Trial Number should take 50000 and 100 seperately
 AgentNum = 7; % Agent Number in this gambler environment
 EnvNum = 10; % Depends on different w
 Rewards = zeros(ProbNum, AgentNum, EnvNum); % Record the payment of each agents at 10000 problems
@@ -61,4 +61,4 @@ for envs = 1:EnvNum
     relativeRewards(envs, :) = rewardsTemp / max(rewardsTemp);
 end
 
-save('fig_6_T100_P10000','Rewards','relativeRewards','pGainAll','pGainRate');
+save('fig_6_T50000_P1000','Rewards','relativeRewards','pGainAll','pGainRate');
