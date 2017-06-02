@@ -23,6 +23,14 @@ classdef CABKAgent < handle
             end
         end
         
+        function action = chooseAction_(obj, previous_result)
+            if obj.experience(obj.sequence + 1) == 0
+                action = previous_result;
+            else
+                action = (obj.experience(obj.sequence + 1) < 0) + 1;
+            end
+        end
+        
         function [] = updateAgent(obj, results)
             obj.trial = obj.trial + 1;
             if obj.trial > obj.k
