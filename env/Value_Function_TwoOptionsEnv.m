@@ -18,7 +18,7 @@ classdef Value_Function_TwoOptionsEnv < handle
     end
     
     methods
-        function obj = TwoOptionsEnv(number_of_state, gain, loss, transition)
+        function obj = Value_Function_TwoOptionsEnv(number_of_state, gain, loss, transition)
         % Constructor
             assert(number_of_state == size(transition, 1));
             assert(number_of_state == size(transition, 2));
