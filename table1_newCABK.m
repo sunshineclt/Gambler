@@ -51,7 +51,7 @@ for problem = 1:problem_count
         [result, whole_result] = env.getResult(action_FP);
         agents{2}.updateAgent(whole_result);
         rewards(2) = rewards(2) + result;
-        optimal(2) = optimal(2) + (action == action_FIBA);
+        optimal(2) = optimal(2) + (action_FP == action_FIBA);
         previous_action = action_FP;
         for j = 3:8
             agent = agents{j};
